@@ -36,3 +36,8 @@ def cadastro(request):
 
 
         return HttpResponse('teste')
+
+
+def logar(request):
+    if request.method == "GET":
+        return render(request, 'login.html')
