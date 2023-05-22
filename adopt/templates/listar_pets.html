@@ -44,7 +44,7 @@
                                     <div class="col-md-4">
                                         <select class="form-select" name="raca">
                                             {% for raca in racas %}
-                                           <option {% id raca_filter.id == raca.id %} selected {% endif %} value=" {{ raca.id }} "> {{ raca }} </option>
+                                           <option {% if raca_filter.id == raca.id %} selected {% endif %} value=" {{ raca.id }} "> {{ raca }} </option>
                                            {% endfor %}
                                         </select>
                                     </div>
@@ -65,7 +65,7 @@
                                 {% for pet in pets%}
                                     <tr class="tabela-linha">
                                         <td width="20%">
-                                            <a href=""><img width="40%" src="{{pet.foto.url}}"></a>
+                                            <a href=" {% url 'divulgar:ver_pet' pet.id %} "><img width="40%" src="{{pet.foto.url}}"></a>
                                         </td>
                                         <td>
                                             {{pet.nome}}

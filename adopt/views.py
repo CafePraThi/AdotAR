@@ -1,6 +1,12 @@
-from django.shortcuts import render
+from datetime import datetime
+
+from django.contrib import messages
+from django.contrib.messages import constants
+from django.shortcuts import redirect, render
 
 from divulgar.models import Pet, Raca
+
+from .models import PedidoAdocao
 
 
 def listar_pets(request):
@@ -22,3 +28,22 @@ def listar_pets(request):
                                                     'racas': racas,
                                                     'cidade': cidade,
                                                     'raca_filter': raca_filter})
+
+
+def pedido_adocao(requeest, id_pet):
+    pet = Pet.objects.filter(id=id_pet).filter(status='P')
+
+    if not pet.exists():
+        messages.add_message(requeest, constants.WARNING,
+                             'Esse Pet não se encontra mais disponivel para adoção')
+        return redirect('/adotar')
+
+    pedido = PedidoAdocao(pet=pet.first(),
+                          usuario=requeest.user,
+                          data=datetime.now())
+
+    pedido.save()
+    messages.add_message(requeest, constants.SUCCESS,
+                         'Pedido de adoção realizado com Sucesso.')
+
+    return redirect('/adotar')

@@ -77,4 +77,4 @@ def remover_pet(request, id):
 def ver_pet(request, id):
     if request.method == 'GET':
         pet = Pet.objects.get(id=id)
-        return render(request, 'ver_pets.html', {'pet': pet})
+        return render(request, 'ver_pet.html', {'pet': pet})
