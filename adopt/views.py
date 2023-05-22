@@ -1,6 +1,7 @@
 from datetime import datetime
 
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
 from django.contrib.messages import constants
 from django.shortcuts import redirect, render
 
@@ -9,6 +10,7 @@ from divulgar.models import Pet, Raca
 from .models import PedidoAdocao
 
 
+@login_required
 def listar_pets(request):
     if request.method == "GET":
         pets = Pet.objects.filter(status='P')
@@ -30,6 +32,7 @@ def listar_pets(request):
                                                     'raca_filter': raca_filter})
 
 
+@login_required
 def pedido_adocao(requeest, id_pet):
     pet = Pet.objects.filter(id=id_pet).filter(status='P')
 

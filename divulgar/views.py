@@ -3,6 +3,8 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.messages import constants
 from django.shortcuts import redirect, render
 
+from adopt.models import PedidoAdocao
+
 from .models import Pet, Raca, Tag
 
 app_name = 'divulgar'
@@ -74,7 +76,16 @@ def remover_pet(request, id):
     return redirect('/divulgar/seus_pets')
 
 
+@login_required
 def ver_pet(request, id):
     if request.method == 'GET':
         pet = Pet.objects.get(id=id)
         return render(request, 'ver_pet.html', {'pet': pet})
+
+
+def ver_pedido_adocao(request):
+    if request.method == "GET":
+        pedidos = PedidoAdocao.objects.filter(
+            usuario=request.user).filter(status="AG")
+
+        return render(request, 'ver_pedido_adocao.html', {'pedidos': pedidos})
