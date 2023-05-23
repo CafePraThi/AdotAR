@@ -83,6 +83,7 @@ def ver_pet(request, id):
         return render(request, 'ver_pet.html', {'pet': pet})
 
 
+@login_required
 def ver_pedido_adocao(request):
     if request.method == "GET":
         pedidos = PedidoAdocao.objects.filter(

@@ -16,7 +16,7 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-2 bg-side-plataforma sidebar">
-                    <h2>ADO.TE</h2>
+                    <h2>AdotAR</h2>
                     <hr>
                   
                     
@@ -46,8 +46,8 @@
                                         
                                         <span class="span-bold2">Cidade:</span>
                                         <p>{{pedido.pet.cidade}}</p>
-                                        <a href="" class="btn btn-success btn-lg">Aprovar</a>
-                                        <a href="" class="btn btn-danger btn-lg">Recusar</a>
+                                        <a href=" {% url 'adopt:processa_pedido_adocao' pedido.id %}?status=A " class="btn btn-success btn-lg">Aprovar</a>
+                                        <a href=" {% url 'adopt:processa_pedido_adocao' pedido.id %}?status=R " class="btn btn-danger btn-lg">Recusar</a>
                                     </div>
                                 </div>
                             </div>
